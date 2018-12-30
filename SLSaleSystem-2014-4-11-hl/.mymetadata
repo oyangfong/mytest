@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SLSaleSystem-2014-4-11-hl"
+  id="myeclipse.1374198433829"
+  context-root="/Slmember"
+  j2ee-spec="5.0"
+  archive="SLSaleSystem-2014-4-11-hl.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

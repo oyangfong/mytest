@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.slsale.dao.goodspack.GoodsPackMapper">
+	
+    <!-- getGoodsPackList -->
+     <select id="getGoodsPackList" resultType="goodsPack" parameterType="goodsPack">
+		select * from goods_pack  
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="goodsPackName != null">
+			 and goodsPackName like #{goodsPackName}
+			</if>
+			<if test="state != null">
+			  and state = #{state}
+			</if>
+			<if test="typeId != null">
+			  and typeId = #{typeId}
+			</if>
+		</trim>
+		order by lastUpdateTime desc limit #{starNum},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="int" parameterType="goodsPack">
+		select count(1) from goods_pack
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="goodsPackName != null">
+			 and goodsPackName like  CONCAT('%',#{goodsPackName},'%')
+			</if>
+			<if test="state != null">
+			  and state = #{state}
+			</if>
+			<if test="typeId != null">
+			  and typeId = #{typeId}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- addGoodsPack -->
+	<insert id="addGoodsPack" parameterType="goodsPack">
+		insert into goods_pack (goodsPackCode,goodsPackName,typeId,typeName,totalPrice,state,
+								num,note,createdBy,createTime,lastUpdateTime) values 
+							 (#{goodsPackCode},#{goodsPackName},#{typeId},#{typeName},#{totalPrice},#{state},
+							 #{num},#{note},#{createdBy},#{createTime},#{lastUpdateTime})
+	</insert>
+	
+	<select id="goodsPackCodeIsExit" resultType="int" parameterType="goodsPack">
+		select count(1) from goods_pack
+			<trim prefix="where" prefixOverrides="and | or">
+				<if test="goodsPackCode != null">
+				  and goodsPackCode = #{goodsPackCode}
+				</if>
+				<if test="id != null">
+				  and id != #{id}
+				</if>
+			</trim>
+	</select>
+	
+	<!-- getUserById -->
+	<select id="getGoodsPackById" resultType="goodsPack" parameterType="goodsPack">
+		select * from goods_pack where id = #{id}
+    </select>
+    
+     <!-- modifyGoodsInfo -->
+	<update id="modifyGoodsPack" parameterType="goodsPack">
+		update goods_pack 
+			<set>
+				 <if test="goodsPackCode != null"> goodsPackCode = #{goodsPackCode},</if>
+				 <if test="goodsPackName != null"> goodsPackName = #{goodsPackName},</if>
+				 <if test="typeId != null"> typeId = #{typeId},</if>
+				 <if test="typeName != null"> typeName = #{typeName},</if>
+				 <if test="totalPrice != null"> totalPrice = #{totalPrice},</if>
+				 <if test="num != null"> num = #{num},</if>
+				 <if test="note != null"> note = #{note},</if>
+				 <if test="state != null"> state = #{state},</if>
+				 <if test="createdBy != null"> createdBy = #{createdBy},</if>
+				 <if test="createTime != null"> createTime = #{createTime},</if>
+				 <if test="lastUpdateTime != null"> lastUpdateTime = #{lastUpdateTime}</if>
+		     </set>
+		  	where id = #{id}
+	</update>
+	
+	 <!-- deleteGoodsPack -->
+	<delete id="deleteGoodsPack" parameterType="goodsPack">
+		delete from goods_pack where id = #{id}
+	</delete>
+	
+	<select id="getAddGoodsPackId" resultType="int">
+		select LAST_INSERT_ID()
+	</select>
+	
+</mapper>  

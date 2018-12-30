@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.slsale.dao.leavemessage.LeaveMessageMapper">
+	
+    <!-- getLeaveMessageList -->
+     <select id="getLeaveMessageList" resultType="leaveMessage" parameterType="leaveMessage">
+		select * from leave_message  
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="createdBy != null">
+			 and createdBy = #{createdBy}
+			</if>
+		</trim>
+		order by createTime desc limit #{starNum},#{pageSize}
+	</select>
+	
+	<!-- getLeaveMessage -->
+	<select id="getLeaveMessage" resultType="leaveMessage" parameterType="leaveMessage">
+		select * from leave_message 
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="id != null">
+			 and id = #{id}
+			</if>
+		</trim>
+    </select>
+	
+	<!-- count -->
+	<select id="count" resultType="int" parameterType="leaveMessage">
+		select count(1) from leave_message
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="createdBy != null">
+			 and createdBy = #{createdBy}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- addLeaveMessage -->
+	<insert id="addLeaveMessage" parameterType="leaveMessage">
+		insert into leave_message (messageCode,messageTitle,messageContent,state,createdBy,createTime) 
+								values (#{messageCode},#{messageTitle},#{messageContent},#{state},#{createdBy},#{createTime})
+	</insert>
+	
+	<!-- modifyLeaveMessage -->
+	<update id="modifyLeaveMessage" parameterType="leaveMessage">
+		update leave_message 
+			<set>
+				 <if test="messageCode != null"> messageCode = #{messageCode},</if>
+				 <if test="messageTitle != null"> messageTitle = #{messageTitle},</if>
+				 <if test="messageContent != null"> messageContent = #{messageContent},</if>
+				 <if test="state != null"> state = #{state},</if>
+				 <if test="createdBy != null"> createdBy = #{createdBy},</if>
+				 <if test="createTime != null"> createTime = #{createTime}</if>
+		     </set>
+		  	where id = #{id}
+	</update>
+	
+	<!-- deleteLeaveMessage -->
+	<delete id="deleteLeaveMessage" parameterType="leaveMessage">
+		delete from leave_message where id = #{id}
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+    <!DOCTYPE configuration   
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+    <configuration>  
+        <settings>  
+            <!-- changes from the defaults -->  
+            <setting name="lazyLoadingEnabled" value="false" />  
+        </settings>  
+       <typeAliases>  
+           <!--这里给实体类取别名，方便在mapper配置文件中使用--> 
+           <!-- add by bdqn_hl 2014-2-21 start -->
+           <typeAlias alias="user" type="org.slsale.pojo.User"/> 
+           <typeAlias alias="function" type="org.slsale.pojo.Function"/> 
+           <typeAlias alias="authority" type="org.slsale.pojo.Authority"/> 
+           <typeAlias alias="dataDictionary" type="org.slsale.pojo.DataDictionary"/> 
+           <typeAlias alias="role" type="org.slsale.pojo.Role"/> 
+           <typeAlias alias="affiche" type="org.slsale.pojo.Affiche"/> 
+           <typeAlias alias="goodsInfo" type="org.slsale.pojo.GoodsInfo"/> 
+           <typeAlias alias="information" type="org.slsale.pojo.Information"/> 
+           <typeAlias alias="goodsPack" type="org.slsale.pojo.GoodsPack"/> 
+           <typeAlias alias="goodsPackAffiliated" type="org.slsale.pojo.GoodsPackAffiliated"/> 
+           <typeAlias alias="uploadTemp" type="org.slsale.pojo.UploadTemp"/>
+           <typeAlias alias="leaveMessage" type="org.slsale.pojo.LeaveMessage"/>
+           <typeAlias alias="reply" type="org.slsale.pojo.Reply"/>
+           <!-- add by bdqn_hl 2014-2-21 end -->
+           
+           <!-- add by bdqn_shy 2014-4-9 start -->
+           <typeAlias alias="userAccountLog" type="org.slsale.pojo.UserAccountLog"/> 
+           <!-- add by bdqn_shy 2014-4-9 end -->
+       </typeAliases>  
+   </configuration>  
